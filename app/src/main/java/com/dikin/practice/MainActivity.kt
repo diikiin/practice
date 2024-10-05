@@ -1,47 +1,41 @@
 package com.dikin.practice
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.DatePicker
+import android.widget.EditText
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.dikin.practice.ui.theme.PracticeTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent {
-            PracticeTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+        setContentView(R.layout.activity_main)
+
+        val datePicker = findViewById<DatePicker>(R.id.date_picker)
+        val editText = findViewById<EditText>(R.id.edit_text)
+        val checkBox = findViewById<CheckBox>(R.id.checkbox)
+        val button = findViewById<Button>(R.id.button)
+
+        button.setOnClickListener {
+            val day = datePicker.dayOfMonth
+            val month = datePicker.month
+            val year = datePicker.year
+            val date = "$day/$month/$year"
+
+            val email = editText.text.toString()
+
+            val isAgreed = checkBox.isChecked
+
+            val intent = Intent(this, AnotherActivity::class.java)
+            intent.putExtra("date", date)
+            intent.putExtra("email", email)
+            intent.putExtra("agreed", isAgreed)
+
+            startActivity(intent)
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    PracticeTheme {
-        Greeting("Android")
     }
 }

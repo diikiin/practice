@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Practice</string>
+    <string name="email">Email:</string>
+    <string name="agree_with_terms">Agree with terms</string>
+    <string name="submit">Submit</string>
+    <string name="date">Date:</string>
+    <string name="is_agreed">Is agreed:</string>
+    <string name="birtdate">Birtdate:</string>
 </resources>
